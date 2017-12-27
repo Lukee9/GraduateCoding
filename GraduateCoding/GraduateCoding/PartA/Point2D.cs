@@ -23,10 +23,11 @@ namespace GraduateCoding.PartA
             origin.x = 0;
             origin.y = 0;
             //Converts the array of points to a list so it can be sorted using an anonymous function based on the calculateDistance method
-            Points.ToList().Sort((a, b) => (
+            List<Point2D> pointList = Points.ToList();
+            pointList.Sort((a, b) => (
             calculateDistance(a, origin).CompareTo(calculateDistance(b, origin)))
             );
-            return Points;
+            return pointList.ToArray();
         }
     }
 }

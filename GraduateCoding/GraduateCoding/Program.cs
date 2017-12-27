@@ -20,7 +20,24 @@ namespace GraduateCoding
             //Checking results
             Console.WriteLine(PartA.Point2D.calculateDistance(pointOne, pointTwo));
 
+            //Testing Part A Question 2:
+            PartA.Point2D pointThree = new PartA.Point2D();
+            PartA.Point2D pointFour = new PartA.Point2D();
+            PartA.Point2D pointFive = new PartA.Point2D();
+            pointThree.x = 3;
+            pointThree.y = 3;
+            pointFour.x = 4;
+            pointFour.y = 1;
+            pointFive.x = 5;
+            pointFive.y = 3;
 
+            PartA.Point2D[] point2DArray = { pointOne, pointTwo, pointThree, pointFour, pointFive };
+            //Checking results
+            point2DArray = PartA.Point2D.sort(point2DArray);
+            foreach (PartA.Point2D p in point2DArray)
+            {
+                Console.WriteLine($"({p.x}, {p.y})");
+            }
             Console.ReadLine();
         }
     }
