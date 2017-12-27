@@ -10,6 +10,7 @@ namespace GraduateCoding
     {
         static void Main(string[] args)
         {
+            
         }
     }
 }
