@@ -41,6 +41,7 @@ namespace GraduateCoding.PartA
         {
             return (pointTwo.x - pointOne.x) * (pointThree.y - pointOne.y) - (pointTwo.y - pointOne.y) * (pointThree.x - pointOne.x);
         }
+        //Perhaps create a new class for line2D, would keep things more clean
         public static bool doesIntersect(Point2D lineOnePointOne, Point2D lineOnePointTwo, Point2D lineTwoPointOne, Point2D lineTwoPointTwo)
         {
             //Firstly creates line equations from points in the form y = mx + c.
@@ -65,7 +66,7 @@ namespace GraduateCoding.PartA
             double intersecty;
             //Rearranged so x = (c2 - c1)/(m1 - m2)
             intersectx = (cLineTwo - cLineOne) / (mLineOne - mLineTwo);
-            //Substitute known point back into equation using x intersection
+            //Substitute known point back into equation using x intersection to find y coordinate
             intersecty = mLineOne * intersectx + cLineOne;
 
             //Point of intersection is now known as (intersectx, intersecty).
@@ -102,6 +103,26 @@ namespace GraduateCoding.PartA
                 else maximum = Math.Max(maximum, p.y);
             }
             return maximum;
+        }
+        public static bool isInsidePolygon(Point2D[] Polygon, Point2D Point)
+        {
+            int intersections = 0;
+            //Define an infinite point, in an ideal world the values would be infinity but we cannot do that within a computing environment
+            Point2D Infinity = new Point2D();
+            Infinity.x = int.MaxValue;
+            Infinity.y = int.MinValue;
+
+            //If a line drawn between the given point and a point placed at infinity intersects with any of the edges of the shape once, then it must be inside that shape
+            for(int i = 1; i < Polygon.Length; i++)
+            {
+                if (doesIntersect(Polygon[i - 1], Polygon[i], Point, Infinity)) intersections++;
+            }
+            //Check the final edge which is skipped by the for loop (the edge between the first point and final point of the polygon)
+            if (doesIntersect(Polygon[Polygon.Length - 1], Polygon[0], Point, Infinity)) intersections++;
+
+            //If the infinity line intersects more than once then it was outside the shape and went through the shape
+            if (intersections == 1) return true;
+            else return false;
         }
     }
 }
