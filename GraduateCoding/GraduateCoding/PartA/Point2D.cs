@@ -25,9 +25,21 @@ namespace GraduateCoding.PartA
             //Converts the array of points to a list so it can be sorted using an anonymous function based on the calculateDistance method
             List<Point2D> pointList = Points.ToList();
             pointList.Sort((a, b) => (
-            calculateDistance(a, origin).CompareTo(calculateDistance(b, origin)))
+                calculateDistance(a, origin).CompareTo(calculateDistance(b, origin)))
             );
             return pointList.ToArray();
+        }
+        public static bool isAntiClockwise(Point2D pointOne, Point2D pointTwo, Point2D pointThree)
+        {
+            return twiceSignedArea(pointOne, pointTwo, pointThree) > 0;
+        }
+        public static bool isCollinear(Point2D pointOne, Point2D pointTwo, Point2D pointThree)
+        {
+            return twiceSignedArea(pointOne, pointTwo, pointThree) == 0;
+        }
+        private static int twiceSignedArea(Point2D pointOne, Point2D pointTwo, Point2D pointThree)
+        {
+            return (pointTwo.x - pointOne.x) * (pointThree.y - pointOne.y) - (pointTwo.y - pointOne.y) * (pointThree.x - pointOne.x);
         }
     }
 }
