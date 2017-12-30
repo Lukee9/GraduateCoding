@@ -50,8 +50,8 @@ namespace GraduateCoding.PartA
             double mLineTwo;
             double cLineTwo;
             //Calculate gradient m = delta y / delta x
-            mLineOne = Math.Abs(lineOnePointTwo.y - lineOnePointOne.y) / Math.Abs(lineOnePointTwo.x - lineOnePointOne.x);
-            mLineTwo = Math.Abs(lineTwoPointTwo.y - lineTwoPointOne.y) / Math.Abs(lineTwoPointTwo.x - lineTwoPointOne.x);
+            mLineOne = (lineOnePointTwo.y - lineOnePointOne.y) / (lineOnePointTwo.x - lineOnePointOne.x);
+            mLineTwo = (lineTwoPointTwo.y - lineTwoPointOne.y) / (lineTwoPointTwo.x - lineTwoPointOne.x);
 
             //If gradients are equal, lines are parallel and will never intercept so can avoid unnecessary processing
             if (mLineOne == mLineTwo) return false;
@@ -72,14 +72,36 @@ namespace GraduateCoding.PartA
             //However this may only occur if the lines are infinite which in our case they may not be.
             //Apply constraints to intersection point to see if our lines intersect
 
-            int minx = Math.Min(Math.Min(Math.Min(lineOnePointOne.x, lineOnePointOne.x), lineTwoPointOne.x), lineTwoPointTwo.x); //Minimum x value of all 4 given points
-            int maxx = Math.Max(Math.Max(Math.Max(lineOnePointOne.x, lineOnePointOne.x), lineTwoPointOne.x), lineTwoPointTwo.x); //Maximum x value of all 4 given points
-            int miny = Math.Min(Math.Min(Math.Min(lineOnePointOne.y, lineOnePointOne.y), lineTwoPointOne.y), lineTwoPointTwo.y); //Minimum y value of all 4 given points
-            int maxy = Math.Max(Math.Max(Math.Max(lineOnePointOne.y, lineOnePointOne.y), lineTwoPointOne.y), lineTwoPointTwo.y); //Maximum y value of all 4 given points
+            //Calculate the minimum and maximum seen x and y value
+            Point2D[] Points = { lineOnePointOne, lineOnePointTwo, lineTwoPointOne, lineTwoPointTwo };
+            int minx = min(Points, true);
+            int maxx = max(Points, true);
+            int miny = min(Points, false);
+            int maxy = max(Points, false);
 
             //Return whether point of intersection is valid within our lines
             if (intersectx >= minx && intersectx <= maxx && intersecty >= miny && intersecty <= maxy) return true;
             else return false;
+        }
+        private static int min(Point2D[] Points, bool x)
+        {
+            int minimum = int.MaxValue;
+            foreach (Point2D p in Points)
+            {
+                if (x) minimum = Math.Min(minimum, p.x);
+                else minimum = Math.Min(minimum, p.y);
+            }
+            return minimum;
+        }
+        private static int max(Point2D[] Points, bool x)
+        {
+            int maximum = int.MinValue;
+            foreach (Point2D p in Points)
+            {
+                if (x) maximum = Math.Max(maximum, p.x);
+                else maximum = Math.Max(maximum, p.y);
+            }
+            return maximum;
         }
     }
 }

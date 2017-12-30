@@ -60,6 +60,14 @@ namespace GraduateCoding
             //Expecting false
             Console.WriteLine(PartA.Point2D.isCollinear(pointFour, pointSeven, pointThree));
 
+            //Testing Part A Question 4:
+            Console.WriteLine(Environment.NewLine + "Part A Question 4:");
+            //Checking results
+            //Expecting true
+            Console.WriteLine(PartA.Point2D.doesIntersect(pointOne, pointTwo, pointThree, pointSix)); //Intersects at (6, 9)
+            //Expecting false
+            Console.WriteLine(PartA.Point2D.doesIntersect(pointOne, pointTwo, pointThree, pointFour)); //Would eventually intersect at (4.5, 0)      
+
             Console.ReadLine();
         }
     }
