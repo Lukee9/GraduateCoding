@@ -51,8 +51,15 @@ namespace GraduateCoding.PartA
             double mLineTwo;
             double cLineTwo;
             //Calculate gradient m = delta y / delta x
-            mLineOne = (lineOnePointTwo.y - lineOnePointOne.y) / (lineOnePointTwo.x - lineOnePointOne.x);
-            mLineTwo = (lineTwoPointTwo.y - lineTwoPointOne.y) / (lineTwoPointTwo.x - lineTwoPointOne.x);
+            int denomOne = lineOnePointTwo.x - lineOnePointOne.x; //Prevents crashing when m = 0
+            int denomTwo = lineTwoPointTwo.x - lineTwoPointOne.x;
+
+            if (denomOne == 0) mLineOne = 0;
+            else
+                mLineOne = (lineOnePointTwo.y - lineOnePointOne.y) / denomOne;
+            if (denomTwo == 0) mLineTwo = 0;
+            else
+                mLineTwo = (lineTwoPointTwo.y - lineTwoPointOne.y) / denomTwo;
 
             //If gradients are equal, lines are parallel and will never intercept so can avoid unnecessary processing
             if (mLineOne == mLineTwo) return false;
@@ -115,7 +122,7 @@ namespace GraduateCoding.PartA
             Infinity.y = int.MaxValue;
 
             //If a line drawn between the given point and a point placed at infinity intersects with any of the edges of the shape once, then it must be inside that shape
-            for(int i = 1; i < Polygon.Length; i++)
+            for (int i = 1; i < Polygon.Length; i++)
             {
                 if (doesIntersect(Polygon[i - 1], Polygon[i], Point, Infinity)) intersections++;
             }
