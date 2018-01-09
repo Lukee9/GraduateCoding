@@ -106,11 +106,13 @@ namespace GraduateCoding.PartA
         }
         public static bool isInsidePolygon(Point2D[] Polygon, Point2D Point)
         {
+            //Needs fixing, intersections == 2 when going through corner. Use a second check for minvalue and work from there
+
             int intersections = 0;
             //Define an infinite point, in an ideal world the values would be infinity but we cannot do that within a computing environment
             Point2D Infinity = new Point2D();
             Infinity.x = int.MaxValue;
-            Infinity.y = int.MinValue;
+            Infinity.y = int.MaxValue;
 
             //If a line drawn between the given point and a point placed at infinity intersects with any of the edges of the shape once, then it must be inside that shape
             for(int i = 1; i < Polygon.Length; i++)

@@ -68,6 +68,41 @@ namespace GraduateCoding
             //Expecting false
             Console.WriteLine(PartA.Point2D.doesIntersect(pointOne, pointTwo, pointThree, pointFour)); //Would eventually intersect at (4.5, 0), both lines stop before reaching y = 0      
 
+            //Testing Part A Question 5:
+            Console.WriteLine(Environment.NewLine + "Part A Question 5:");
+            PartA.Point2D cornerOne = new PartA.Point2D();
+            PartA.Point2D cornerTwo = new PartA.Point2D();
+            PartA.Point2D cornerThree = new PartA.Point2D();
+            PartA.Point2D cornerFour = new PartA.Point2D();
+            cornerOne.x = 0;
+            cornerOne.y = 0;
+            cornerTwo.x = 2;
+            cornerTwo.y = 0;
+            cornerThree.x = 2;
+            cornerThree.y = 2;
+            cornerFour.x = 0;
+            cornerFour.y = 2;
+
+            PartA.Point2D[] square = new PartA.Point2D[] { cornerOne, cornerTwo, cornerThree, cornerFour };
+
+            PartA.Point2D inside = new PartA.Point2D();
+            PartA.Point2D outside = new PartA.Point2D();
+            PartA.Point2D outsideCorner = new PartA.Point2D(); //In line with corners, testing for false positive
+
+            inside.x = 1;
+            inside.y = 1;
+            outside.x = -5;
+            outside.y = 3;
+            outsideCorner.x = -1;
+            outsideCorner.y = -1;
+            //Checking results
+            //Expecting true
+            Console.WriteLine(PartA.Point2D.isInsidePolygon(square, inside));
+            //Expecting false
+            Console.WriteLine(PartA.Point2D.isInsidePolygon(square, outside));
+            //Expecting false
+            Console.WriteLine(PartA.Point2D.isInsidePolygon(square, outsideCorner));
+
             Console.ReadLine();
         }
     }
