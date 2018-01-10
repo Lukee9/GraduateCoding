@@ -50,14 +50,26 @@ namespace GraduateCoding.PartA
 
             double mLineTwo;
             double cLineTwo;
+
+            //Prevents use of incorrect formula with vertical lines
+            bool verticalLineOne = false;
+            bool verticalLineTwo = false;
             //Calculate gradient m = delta y / delta x
-            int denomOne = lineOnePointTwo.x - lineOnePointOne.x; //Prevents crashing when m = 0
+            int denomOne = lineOnePointTwo.x - lineOnePointOne.x; //Prevents crashing when m = 0 (vertical line)
             int denomTwo = lineTwoPointTwo.x - lineTwoPointOne.x;
 
-            if (denomOne == 0) mLineOne = 0;
+            if (denomOne == 0)
+            {
+                mLineOne = 0;
+                verticalLineOne = true;
+            }
             else
                 mLineOne = (lineOnePointTwo.y - lineOnePointOne.y) / denomOne;
-            if (denomTwo == 0) mLineTwo = 0;
+            if (denomTwo == 0)
+            {
+                mLineTwo = 0;
+                verticalLineTwo = true;
+            }
             else
                 mLineTwo = (lineTwoPointTwo.y - lineTwoPointOne.y) / denomTwo;
 
@@ -65,27 +77,49 @@ namespace GraduateCoding.PartA
             if (mLineOne == mLineTwo) return false;
 
             //Calculate constant c by substituting known points
-            cLineOne = lineOnePointOne.y - mLineOne * lineOnePointOne.x;
-            cLineTwo = lineTwoPointOne.y - mLineTwo * lineTwoPointOne.x;
+
+
+            if (mLineOne == 0 && !verticalLineOne) //for horizontal lines
+                cLineOne = lineOnePointOne.y;
+            else
+            {
+                cLineOne = lineOnePointOne.y - mLineOne * lineOnePointOne.x;
+            }
+            if (mLineTwo == 0 && !verticalLineTwo)
+                cLineTwo = lineTwoPointOne.y;
+            else
+            {
+                cLineTwo = lineTwoPointOne.y - mLineTwo * lineTwoPointOne.x;
+            }
 
             //At point of intersection y1 = y2 therefore m1x + c1 = m2x + c2 so solve to find x coordinate
             double intersectx;
             double intersecty;
-            //Rearranged so x = (c2 - c1)/(m1 - m2)
-            intersectx = (cLineTwo - cLineOne) / (mLineOne - mLineTwo);
-            //Substitute known point back into equation using x intersection to find y coordinate
+
+            if (verticalLineOne) //Vertical line
+                intersectx = lineOnePointOne.x;
+            else if (verticalLineTwo)
+                intersectx = lineTwoPointOne.x;
+            else
+            {
+                //Rearranged so x = (c2 - c1)/(m1 - m2)
+                intersectx = (cLineTwo - cLineOne) / (mLineOne - mLineTwo);
+            }
             intersecty = mLineOne * intersectx + cLineOne;
+            //Substitute known point back into equation using x intersection to find y coordinate
+
 
             //Point of intersection is now known as (intersectx, intersecty).
             //However this may only occur if the lines are infinite which in our case they may not be.
             //Apply constraints to intersection point to see if our lines intersect
 
-            //Calculate the minimum and maximum seen x and y value
-            Point2D[] Points = { lineOnePointOne, lineOnePointTwo, lineTwoPointOne, lineTwoPointTwo };
-            int minx = min(Points, true);
-            int maxx = max(Points, true);
-            int miny = min(Points, false);
-            int maxy = max(Points, false);
+            //Calculate the minimax and maximin of seen x and y value to add constraints
+            Point2D[] lineOne = { lineOnePointOne, lineOnePointTwo };
+            Point2D[] lineTwo = { lineTwoPointOne, lineTwoPointTwo };
+            int minx = Math.Max(min(lineOne, true), min(lineTwo, true));
+            int maxx = Math.Min(max(lineOne, true), max(lineTwo, true));
+            int miny = Math.Max(min(lineOne, false), min(lineTwo, false));
+            int maxy = Math.Min(max(lineOne, false), max(lineTwo, false));
 
             //Return whether point of intersection is valid within our lines
             if (intersectx >= minx && intersectx <= maxx && intersecty >= miny && intersecty <= maxy) return true;
