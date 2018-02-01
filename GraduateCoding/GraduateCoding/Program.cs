@@ -10,6 +10,13 @@ namespace GraduateCoding
     {
         static void Main(string[] args)
         {
+            testPartA();
+            Console.WriteLine(Environment.NewLine);
+            testPartB();
+            Console.ReadLine();
+        }
+        static void testPartA()
+        {
             //Testing Part A Question 1:
             Console.WriteLine("Part A Question 1:");
             PartA.Point2D pointOne = new PartA.Point2D();
@@ -102,8 +109,41 @@ namespace GraduateCoding
             Console.WriteLine(PartA.Point2D.isInsidePolygon(square, outside));
             //Expecting false
             Console.WriteLine(PartA.Point2D.isInsidePolygon(square, outsideCorner));
+        }
+        static void testPartB()
+        {
+            //Defining our tournament of 20 players
+            String[] players = { "Valentina Ruiz", "Nina Jordan", "Alexander Lucas", "Julie Marks", "Miranda Richards", "Josephine Palmer", "Maxwell Horne", "Angeline Rodgers", "Abbey Woodward", "Kaitlyn Mayo", "Saige Mcneil ", "Andrea Fitzpatrick", "Antoine Castillo", "Giuliana Montes", "Duncan Clayton", "Iris Swanson", "Vanessa Graves", "Carly Rosario", "Myles Mack", "Danika Cross" };
+            PartB.Tournament t = new PartB.Tournament(players);
+            //Testing Part B Question 1 and 3:
+            Console.WriteLine("Part B Question 1 (and 3):");
+            String[] matches = t.generateMatches();
+            //Checking results
+            foreach (String match in matches)
+            {
+                Console.WriteLine(match);
+            }
 
+            //Testing Part B Question 2:
+            Console.WriteLine(Environment.NewLine + "Part B Question 2:");
+            //Checking results
+            Console.WriteLine(t.outputMatches(Environment.CurrentDirectory)); //Expecting true
+
+
+            //Testing bonus question:
+            Console.WriteLine(Environment.NewLine + "Part B Bonus:");
+            Console.WriteLine(Environment.NewLine + "Press enter to begin...");
             Console.ReadLine();
+            String[] players19 = { "Valentina Ruiz", "Nina Jordan", "Alexander Lucas", "Julie Marks", "Miranda Richards", "Josephine Palmer", "Maxwell Horne", "Angeline Rodgers", "Abbey Woodward", "Kaitlyn Mayo", "Saige Mcneil ", "Andrea Fitzpatrick", "Antoine Castillo", "Giuliana Montes", "Duncan Clayton", "Iris Swanson", "Vanessa Graves", "Carly Rosario", "Myles Mack" };
+            PartB.Tournament t19 = new PartB.Tournament(players19);
+            String[] matches19 = t.generateMatches();
+            //Checking results
+            foreach (String match in matches19)
+            {
+                Console.WriteLine(match);
+            }
+            Console.WriteLine(t19.outputMatches(Environment.CurrentDirectory)); //Expecting true
+
         }
     }
 }

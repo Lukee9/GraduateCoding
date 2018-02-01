@@ -41,7 +41,6 @@ namespace GraduateCoding.PartA
         {
             return (pointTwo.x - pointOne.x) * (pointThree.y - pointOne.y) - (pointTwo.y - pointOne.y) * (pointThree.x - pointOne.x);
         }
-        //Perhaps create a new class for line2D, would keep things more clean
         public static bool doesIntersect(Point2D lineOnePointOne, Point2D lineOnePointTwo, Point2D lineTwoPointOne, Point2D lineTwoPointTwo)
         {
             //Firstly creates line equations from points in the form y = mx + c.
