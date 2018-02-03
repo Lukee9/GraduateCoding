@@ -42,12 +42,16 @@ namespace GraduateCoding.PartB
         public bool outputMatches(String path)
         {
             List<String> matches = generateMatches().ToList<String>();
-
+            int difference = 0; //Fixes odd number of players
             for (int i = 0; i < (pl.Length - 1) * 2; i++)
             {
                 try
                 {
-                    System.IO.File.WriteAllLines($"{path}\\match{i + 1}.txt", matches.GetRange(i * (pl.Length / 2), (pl.Length / 2)));
+                    System.IO.File.WriteAllLines($"{path}\\match{i + 1}.txt", matches.GetRange(i * (pl.Length / 2), (pl.Length / 2) + difference));
+                    if(pl.Length % 2 != 0) //Fixes odd number of players
+                    {
+                        difference = (difference ==  0) ? 1 : 0;
+                    }
                 }
                 catch (Exception e)
                 {

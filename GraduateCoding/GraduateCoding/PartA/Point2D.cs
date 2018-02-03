@@ -19,9 +19,11 @@ namespace GraduateCoding.PartA
         public static Point2D[] sort(Point2D[] Points)
         {
             //Defines the origin as (0,0)
-            Point2D origin = new Point2D();
-            origin.x = 0;
-            origin.y = 0;
+            Point2D origin = new Point2D
+            {
+                x = 0,
+                y = 0
+            };
             //Converts the array of points to a list so it can be sorted using an anonymous function based on the calculateDistance method
             List<Point2D> pointList = Points.ToList();
             pointList.Sort((a, b) => (
