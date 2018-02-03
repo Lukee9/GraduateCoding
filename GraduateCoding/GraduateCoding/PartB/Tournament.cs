@@ -42,26 +42,12 @@ namespace GraduateCoding.PartB
         public bool outputMatches(String path)
         {
             List<String> matches = generateMatches().ToList<String>();
-            int floorlength = 0;
-            int ceilinglength = 0;
-            int linelength;
-            int startlength = 0;
+
             for (int i = 0; i < (pl.Length - 1) * 2; i++)
             {
                 try
                 {
-                    floorlength = (int)Math.Ceiling((double)pl.Length / 2) - 1;
-                    ceilinglength = floorlength + 1;
-                    if (startlength + ceilinglength < matches.Count && matches[startlength + floorlength].Split("round".ToCharArray())[1] == matches[startlength + ceilinglength].Split("round".ToCharArray())[1])
-                    {
-                        linelength = ceilinglength;
-                    }
-                    else
-                    {
-                        linelength = floorlength;
-                    }
-                    System.IO.File.WriteAllLines($"{path}\\match{i + 1}.txt", matches.GetRange(startlength, linelength));
-                    startlength += linelength;
+                    System.IO.File.WriteAllLines($"{path}\\match{i + 1}.txt", matches.GetRange(i * (pl.Length / 2), (pl.Length / 2)));
                 }
                 catch (Exception e)
                 {

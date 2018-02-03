@@ -129,11 +129,7 @@ namespace GraduateCoding
             //Checking results
             Console.WriteLine(t.outputMatches(Environment.CurrentDirectory)); //Expecting true
 
-
             //Testing bonus question:
-            Console.WriteLine(Environment.NewLine + "Part B Bonus:");
-            Console.WriteLine(Environment.NewLine + "Press enter to begin...");
-            Console.ReadLine();
             String[] players19 = { "Valentina Ruiz", "Nina Jordan", "Alexander Lucas", "Julie Marks", "Miranda Richards", "Josephine Palmer", "Maxwell Horne", "Angeline Rodgers", "Abbey Woodward", "Kaitlyn Mayo", "Saige Mcneil ", "Andrea Fitzpatrick", "Antoine Castillo", "Giuliana Montes", "Duncan Clayton", "Iris Swanson", "Vanessa Graves", "Carly Rosario", "Myles Mack" };
             PartB.Tournament t19 = new PartB.Tournament(players19);
             String[] matches19 = t.generateMatches();
